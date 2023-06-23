@@ -1,7 +1,13 @@
-FROM python:3.7-alpine
+FROM python:3.7.12-alpine
+
 RUN mkdir /tfflaskapp
 WORKDIR /tfflaskapp
-COPY ./tfflask /tfflaskapp
-RUN pip install -r requirements.txt
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY tfflask /tfflaskapp
+
 EXPOSE 8080
-CMD ["python","web.py"]
+
+CMD ["python", "web.py"]
